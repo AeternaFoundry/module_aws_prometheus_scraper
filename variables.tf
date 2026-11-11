@@ -12,6 +12,9 @@ Optional:
             - workspace_arn (required)
         - cloudwatch (optional, block):
             - dataset_arn (required)
+    - exporter (block):
+        - opensearch (optional, block):
+            - domain_arn (required)
     - role_configuration (block):
         - source_role_arn (optional)
         - target_role_arn (optional)
@@ -36,6 +39,11 @@ EOT
       })))
       cloudwatch = optional(list(object({
         dataset_arn = string
+      })))
+    })))
+    exporter = optional(list(object({
+      opensearch = optional(list(object({
+        domain_arn = string
       })))
     })))
     role_configuration = optional(list(object({

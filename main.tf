@@ -24,6 +24,18 @@ resource "aws_prometheus_scraper" "prometheus_scrapers" {
     }
   }
 
+  dynamic "exporter" {
+    for_each = each.value.exporter != null ? each.value.exporter : []
+    content {
+      dynamic "opensearch" {
+        for_each = exporter.value.opensearch != null ? exporter.value.opensearch : []
+        content {
+          domain_arn = opensearch.value.domain_arn
+        }
+      }
+    }
+  }
+
   dynamic "role_configuration" {
     for_each = each.value.role_configuration != null ? each.value.role_configuration : []
     content {

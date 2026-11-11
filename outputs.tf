@@ -14,6 +14,10 @@ output "prometheus_scrapers_destination" {
   description = "Map of destination values across all prometheus_scrapers, keyed the same as var.prometheus_scrapers"
   value       = { for k, v in aws_prometheus_scraper.prometheus_scrapers : k => v.destination if v.destination != null && length(v.destination) > 0 }
 }
+output "prometheus_scrapers_exporter" {
+  description = "Map of exporter values across all prometheus_scrapers, keyed the same as var.prometheus_scrapers"
+  value       = { for k, v in aws_prometheus_scraper.prometheus_scrapers : k => v.exporter if v.exporter != null && length(v.exporter) > 0 }
+}
 output "prometheus_scrapers_region" {
   description = "Map of region values across all prometheus_scrapers, keyed the same as var.prometheus_scrapers"
   value       = { for k, v in aws_prometheus_scraper.prometheus_scrapers : k => v.region if v.region != null && length(v.region) > 0 }
